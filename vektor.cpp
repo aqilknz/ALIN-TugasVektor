@@ -84,10 +84,10 @@ int main() {
         cin >> pilihan;
 
         int dimensi;
-        cout << "Masukkan dimensi vektor: ";
-        cin >> dimensi;
-        vector<int> vektor1(dimensi);
-        vector<int> vektor2(dimensi);
+        cout << "Masukkan panjang elemen: ";
+        cin >> panjang;
+        vector<int> vektor1(panjang);
+        vector<int> vektor2(panjang);
 
         switch (pilihan){
             case 1:
