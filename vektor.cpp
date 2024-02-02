@@ -83,7 +83,7 @@ int main() {
         cout << "Pilihan: ";
         cin >> pilihan;
 
-        int dimensi;
+        int panjang;
         cout << "Masukkan panjang elemen: ";
         cin >> panjang;
         vector<int> vektor1(panjang);
