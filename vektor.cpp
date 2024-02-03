@@ -79,7 +79,7 @@ int main() {
         cout << "2. Pengurangan Vektor\n";
         cout << "3. Perkalian Vektor\n";
         cout << "4. Dot Product Vektor\n";
-        cout << "5. Transformasi Elementer Vektor (menggunakan skalar)\n";
+        cout << "5. Transformasi Elementer Vektor\n";
         cout << "Pilihan: ";
         cin >> pilihan;
 
