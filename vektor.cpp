@@ -41,9 +41,11 @@ vector<int> kurangVektor(const vector<int>& vektor1, const vector<int>& vektor2)
 
 // Fungsi untuk perkalian dua vektor
 vector<int> perkalianVektor(const vector<int>& vektor1, const vector<int>& vektor2){
-    vector<int> hasil;
-    for (size_t i = 0; i < vektor1.size(); ++i){
-        hasil.push_back(vektor1[i] * vektor2[i]);
+    vector<int> hasil(vektor1.size());
+    for (size_t i = 0; i < vektor1.size(); ++i) {
+        size_t next_i = (i + 1) % vektor1.size();
+        size_t next_next_i = (next_i + 1) % vektor1.size();
+        hasil[i] = vektor1[next_i] * vektor2[next_next_i] - vektor1[next_next_i] * vektor2[next_i];
     }
     return hasil;
 }
@@ -139,7 +141,7 @@ int main() {
                     cin >> skalar;
                     auto fungsiTransformasi = [skalar](int elem) {return elem * skalar;};
                     vector<int> hasil = transformasi_elemen(vektor1,fungsiTransformasi);
-                    tampilkan_vektor(hasil, "Hasil Penjumlahan Vektor");
+                    tampilkan_vektor(hasil, "Hasil Transformasi Elementer Vektor menggunakan skalar adalah ");
                 }
                 break;
             default:
