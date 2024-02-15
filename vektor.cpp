@@ -12,7 +12,7 @@ void inputVektor(vector<int>& vektor, const string& vektorName){
     }
 }
 
-// Fungsi untuk menampilakan
+// Fungsi untuk menampilkan
 void tampilkan_vektor(const vector<int>& vektor, const string& pesan) {
     cout << pesan << ": ";
     for (const auto& elem : vektor) {
@@ -23,7 +23,12 @@ void tampilkan_vektor(const vector<int>& vektor, const string& pesan) {
 
 // Fungsi untuk pertambahan dua vektor
 vector<int> tambahVektor(const vector<int>& vektor1, const vector<int>& vektor2){
-    vector<int> hasil;
+    /* A = [a1 a2]  ; B = [b1 b2] ; A + B = ?
+    A + B = [a1+b1   a2+b2]
+    A = [2  3]  ; B = [1  4]
+    A + B = [2+1  3+4 ] = [3  7]
+    */ 
+    vector<int> hasil; 
     for (size_t i = 0; i < vektor1.size(); ++i){
         hasil.push_back(vektor1[i] + vektor2[i]);
     }
@@ -32,6 +37,11 @@ vector<int> tambahVektor(const vector<int>& vektor1, const vector<int>& vektor2)
 
 // Fungsi untuk pengurangan dua vektor
 vector<int> kurangVektor(const vector<int>& vektor1, const vector<int>& vektor2){
+    /* A = [a1 a2]  ; B = [b1 b2] ; A - B = ?
+    A - B = [a1-b1   a2-b2]
+    A = [4  3]  ; B = [2  2]
+    A - B = [4-2  3-2 ] = [2  1]
+    */ 
     vector<int> hasil;
     for (size_t i = 0; i < vektor1.size(); ++i){
         hasil.push_back(vektor1[i] - vektor2[i]);
@@ -41,18 +51,29 @@ vector<int> kurangVektor(const vector<int>& vektor1, const vector<int>& vektor2)
 
 // Fungsi untuk perkalian dua vektor
 vector<int> perkalianVektor(const vector<int>& vektor1, const vector<int>& vektor2){
-    vector<int> hasil(vektor1.size());
-    for (size_t i = 0; i < vektor1.size(); ++i) {
-        size_t next_i = (i + 1) % vektor1.size();
-        size_t next_next_i = (next_i + 1) % vektor1.size();
-        hasil[i] = vektor1[next_i] * vektor2[next_next_i] - vektor1[next_next_i] * vektor2[next_i];
-    }
+    /* A = [a1 a2 a3]           | A = [1 2 2]
+    B = [b1 b2 b3]              | B = [-3 -2 -1]
+    A X B = C                   |
+    C1 = [a2 * b3 - a3 * b2]    | C1 = [2 * (-1) - 2 * (-2)] 
+    C2 = [a3 * b1 - a1 * b3]    | C2 = [2 * (-3) - 1 * (-1)]
+    C3 = [a1 * b2 - a2 * b1]    | C3 = [1 * (-2) - 2 * (-3)]
+    C  = [C1 C2 C3]             |  C = [ 2 -5 4]
+    */
+    vector<int> hasil;
+    hasil.push_back(vektor1[1] * vektor2[2] - vektor1[2] * vektor2[1]);
+    hasil.push_back(vektor1[2] * vektor2[0] - vektor1[0] * vektor2[2]);
+    hasil.push_back(vektor1[0] * vektor2[1] - vektor1[1] * vektor2[0]);
+    return hasil;
+
     return hasil;
 }
 
 // Fungsi untuk dot product dua vektor
 int dot_product(const vector<int>& vektor1, const vector<int>& vektor2) {
-
+    /* A = [a1 a2 a3]               | A = [1 2 3]
+    B = [b1 b2 b3]                  | B = [4 5 6]
+    A . B = a1*b1 + a2*b2 + a3*b3   | A . B = 1*4 + 2*5 + 3*6 = 32
+    */
     int hasil = 0;
     for (size_t i = 0; i < vektor1.size(); ++i) {
         hasil += vektor1[i] * vektor2[i];
@@ -63,6 +84,9 @@ int dot_product(const vector<int>& vektor1, const vector<int>& vektor2) {
 
 // Fungsi untuk transformasi elementer menggunakan skalar vektor
 vector<int> transformasi_elemen(const vector<int>& vektor, function<int(int)> fungsi) {
+    /* A = [a1 b1 c1]  ; skalar = k     | A = [2 3 1] ; k = 2
+    Ak = [k*a1 k*a2 k*a3]               | Ak = [2*2 2*3 2*1] = [4 6 2]
+    */ 
     vector<int> hasil;
     for (const auto& elem : vektor) {
         hasil.push_back(fungsi(elem));
